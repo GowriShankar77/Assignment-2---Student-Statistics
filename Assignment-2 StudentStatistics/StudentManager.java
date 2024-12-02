@@ -17,12 +17,16 @@ public class StudentManager {
         String line;
         // Read the file line by line
         while ((line = reader.readLine()) != null) {
-            // Assuming each line contains student data in the form "name,score"
+            // Debugging: Print the line read from the file
+            System.out.println("Read line: " + line);
+
             String[] data = line.split(","); // Adjust based on your file format
             if (data.length == 2) {
                 String name = data[0].trim();
                 double score = Double.parseDouble(data[1].trim());
                 students.add(new Student(name, score));
+            } else {
+                System.out.println("Skipping invalid line: " + line);
             }
         }
         reader.close();  // Don't forget to close the reader
@@ -47,7 +51,6 @@ public class StudentManager {
     }
 
     public void displayTop5AndBottom5Students() {
-        // Sort students by score and display top 5 and bottom 5
         students.sort((s1, s2) -> Double.compare(s2.getScore(), s1.getScore()));  // Sort in descending order
         System.out.println("Top 5 Students:");
         for (int i = 0; i < 5 && i < students.size(); i++) {
