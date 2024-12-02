@@ -1,13 +1,15 @@
 #BlueJ class context
 comment0.target=Menu
 comment1.params=
-comment1.target=void\ displayMenu()
+comment1.target=Menu()
 comment2.params=
-comment2.target=void\ loadFile()
-comment3.params=
-comment3.target=void\ displayAllStudents()
+comment2.target=void\ showMenu()
+comment3.params=scanner
+comment3.target=void\ loadFile(java.util.Scanner)
 comment4.params=
-comment4.target=void\ filterStudents()
-comment5.params=
-comment5.target=void\ displayTopAndBottomStudents()
-numComments=6
+comment4.target=void\ displayAllStudents()
+comment5.params=scanner
+comment5.target=void\ filterStudentsByThreshold(java.util.Scanner)
+comment6.params=
+comment6.target=void\ displayTopAndBottom5Students()
+numComments=7

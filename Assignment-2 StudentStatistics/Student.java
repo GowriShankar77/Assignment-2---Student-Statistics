@@ -1,32 +1,24 @@
 public class Student {
-    private String id;
+
     private String name;
-    private int[] marks;
-    private int totalMarks;
+    private double score;
 
-    public Student(String id, String name, int[] marks) {
-        this.id = id;
+    public Student(String name, double score) {
         this.name = name;
-        this.marks = marks;
-        calculateTotalMarks();
+        this.score = score;
     }
 
-    public void calculateTotalMarks() {
-        totalMarks = 0;
-        for (int mark : marks) {
-            totalMarks += mark;
-        }
+    public String getName() {
+        return name;
     }
 
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public int[] getMarks() { return marks; }
-    public int getTotalMarks() { return totalMarks; }
+    public double getScore() {
+        return score;
+    }
 
     @Override
     public String toString() {
-        return String.format("ID: %s, Name: %s, Marks: %s, Total: %d",
-                id, name, java.util.Arrays.toString(marks), totalMarks);
+        return "Student{name='" + name + "', score=" + score + "}";
     }
 }
 

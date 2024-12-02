@@ -1,15 +1,13 @@
 #BlueJ class context
 comment0.target=StudentManager
-comment1.params=fileName
-comment1.target=void\ readFile(java.lang.String)
-comment2.params=threshold
-comment2.target=java.util.List\ filterStudents(int)
+comment1.params=
+comment1.target=StudentManager()
+comment2.params=fileName
+comment2.target=void\ readFile(java.lang.String)
 comment3.params=
-comment3.target=void\ sortStudentsByMarks()
-comment4.params=
-comment4.target=java.util.List\ getTopStudents()
+comment3.target=void\ displayAllStudents()
+comment4.params=threshold
+comment4.target=void\ filterStudentsByThreshold(double)
 comment5.params=
-comment5.target=java.util.List\ getBottomStudents()
-comment6.params=
-comment6.target=java.util.List\ getStudents()
-numComments=7
+comment5.target=void\ displayTop5AndBottom5Students()
+numComments=6

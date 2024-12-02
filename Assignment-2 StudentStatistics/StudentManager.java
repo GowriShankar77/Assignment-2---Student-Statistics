@@ -1,49 +1,63 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentManager {
-    private List<Student> students = new ArrayList<>();
+
+    private List<Student> students;
+
+    public StudentManager() {
+        students = new ArrayList<>();
+    }
 
     public void readFile(String fileName) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line;
-        while ((line = br.readLine()) != null) {
-            if (line.startsWith("#") || line.isBlank()) continue; // Skip comments
-            String[] parts = line.split(",");
-            String id = parts[0].trim();
-            String name = parts[1].trim();
-            int[] marks = Arrays.stream(parts[2].split(" ")).mapToInt(Integer::parseInt).toArray();
-            students.add(new Student(id, name, marks));
-        }
-        br.close();
-    }
-
-    public List<Student> filterStudents(int threshold) {
-        List<Student> filtered = new ArrayList<>();
-        for (Student student : students) {
-            if (student.getTotalMarks() < threshold) {
-                filtered.add(student);
+        // Read the file line by line
+        while ((line = reader.readLine()) != null) {
+            // Assuming each line contains student data in the form "name,score"
+            String[] data = line.split(","); // Adjust based on your file format
+            if (data.length == 2) {
+                String name = data[0].trim();
+                double score = Double.parseDouble(data[1].trim());
+                students.add(new Student(name, score));
             }
         }
-        return filtered;
+        reader.close();  // Don't forget to close the reader
     }
 
-    public void sortStudentsByMarks() {
-        students.sort(Comparator.comparingInt(Student::getTotalMarks).reversed());
+    public void displayAllStudents() {
+        if (students.isEmpty()) {
+            System.out.println("No students data available.");
+            return;
+        }
+        for (Student student : students) {
+            System.out.println(student);
+        }
     }
 
-    public List<Student> getTopStudents() {
-        sortStudentsByMarks();
-        return students.subList(0, Math.min(5, students.size()));
+    public void filterStudentsByThreshold(double threshold) {
+        for (Student student : students) {
+            if (student.getScore() >= threshold) {
+                System.out.println(student);
+            }
+        }
     }
 
-    public List<Student> getBottomStudents() {
-        sortStudentsByMarks();
-        return students.subList(Math.max(0, students.size() - 5), students.size());
-    }
-
-    public List<Student> getStudents() {
-        return students;
+    public void displayTop5AndBottom5Students() {
+        // Sort students by score and display top 5 and bottom 5
+        students.sort((s1, s2) -> Double.compare(s2.getScore(), s1.getScore()));  // Sort in descending order
+        System.out.println("Top 5 Students:");
+        for (int i = 0; i < 5 && i < students.size(); i++) {
+            System.out.println(students.get(i));
+        }
+        System.out.println("Bottom 5 Students:");
+        for (int i = students.size() - 1; i >= students.size() - 5 && i >= 0; i--) {
+            System.out.println(students.get(i));
+        }
     }
 }
+
 
