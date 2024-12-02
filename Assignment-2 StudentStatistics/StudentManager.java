@@ -1,19 +1,19 @@
 
 /**
- * Write a description of class CopyOfStudentMarksStatistics here.
+ * Write a description of class StudentManager here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-public class CopyOfStudentMarksStatistics
+public class StudentManager
 {
     // instance variables - replace the example below with your own
     private int x;
 
     /**
-     * Constructor for objects of class CopyOfStudentMarksStatistics
+     * Constructor for objects of class StudentManager
      */
-    public CopyOfStudentMarksStatistics()
+    public StudentManager()
     {
         // initialise instance variables
         x = 0;

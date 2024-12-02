@@ -1,19 +1,19 @@
 
 /**
- * Write a description of class StudentMarksStatistics here.
+ * Write a description of class Student here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-public class StudentMarksStatistics
+public class Student
 {
     // instance variables - replace the example below with your own
     private int x;
 
     /**
-     * Constructor for objects of class StudentMarksStatistics
+     * Constructor for objects of class Student
      */
-    public StudentMarksStatistics()
+    public Student()
     {
         // initialise instance variables
         x = 0;
