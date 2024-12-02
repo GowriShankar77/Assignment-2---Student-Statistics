@@ -1,33 +1,32 @@
+public class Student {
+    private String id;
+    private String name;
+    private int[] marks;
+    private int totalMarks;
 
-/**
- * Write a description of class Student here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class Student
-{
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Student
-     */
-    public Student()
-    {
-        // initialise instance variables
-        x = 0;
+    public Student(String id, String name, int[] marks) {
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
+        calculateTotalMarks();
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void calculateTotalMarks() {
+        totalMarks = 0;
+        for (int mark : marks) {
+            totalMarks += mark;
+        }
+    }
+
+    public String getId() { return id; }
+    public String getName() { return name; }
+    public int[] getMarks() { return marks; }
+    public int getTotalMarks() { return totalMarks; }
+
+    @Override
+    public String toString() {
+        return String.format("ID: %s, Name: %s, Marks: %s, Total: %d",
+                id, name, java.util.Arrays.toString(marks), totalMarks);
     }
 }
+

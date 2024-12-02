@@ -1,33 +1,49 @@
+import java.io.*;
+import java.util.*;
 
-/**
- * Write a description of class StudentManager here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class StudentManager
-{
-    // instance variables - replace the example below with your own
-    private int x;
+public class StudentManager {
+    private List<Student> students = new ArrayList<>();
 
-    /**
-     * Constructor for objects of class StudentManager
-     */
-    public StudentManager()
-    {
-        // initialise instance variables
-        x = 0;
+    public void readFile(String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        String line;
+        while ((line = br.readLine()) != null) {
+            if (line.startsWith("#") || line.isBlank()) continue; // Skip comments
+            String[] parts = line.split(",");
+            String id = parts[0].trim();
+            String name = parts[1].trim();
+            int[] marks = Arrays.stream(parts[2].split(" ")).mapToInt(Integer::parseInt).toArray();
+            students.add(new Student(id, name, marks));
+        }
+        br.close();
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public List<Student> filterStudents(int threshold) {
+        List<Student> filtered = new ArrayList<>();
+        for (Student student : students) {
+            if (student.getTotalMarks() < threshold) {
+                filtered.add(student);
+            }
+        }
+        return filtered;
+    }
+
+    public void sortStudentsByMarks() {
+        students.sort(Comparator.comparingInt(Student::getTotalMarks).reversed());
+    }
+
+    public List<Student> getTopStudents() {
+        sortStudentsByMarks();
+        return students.subList(0, Math.min(5, students.size()));
+    }
+
+    public List<Student> getBottomStudents() {
+        sortStudentsByMarks();
+        return students.subList(Math.max(0, students.size() - 5), students.size());
+    }
+
+    public List<Student> getStudents() {
+        return students;
     }
 }
+
