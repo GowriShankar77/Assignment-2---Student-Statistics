@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -49,14 +50,20 @@ public class Menu {
         System.out.print("Enter file name: ");
         String fileName = scanner.nextLine();
 
-        // Debugging: Print current directory
-        System.out.println("Current working directory: " + System.getProperty("user.dir"));
-        System.out.println("Attempting to load file from: " + fileName);
+        File file = new File(fileName);
 
         try {
-            // For testing, you can hardcode the file path as absolute path for now
-            String absoluteFilePath = "C:\\Users\\gowri\\Desktop\\Units\\Fundamentals of programming\\Assignment 2\\Assignment-2 StudentStatistics\\students.txt";
-            manager.readFile(absoluteFilePath);  // Use absolute path for testing
+            if (!file.exists()) {
+                System.out.println("Error: The file '" + fileName + "' does not exist.");
+                return;
+            }
+
+            if (file.length() == 0) {
+                System.out.println("Error: The file '" + fileName + "' is empty.");
+                return;
+            }
+
+            manager.readFile(fileName);
             System.out.println("File loaded successfully.");
         } catch (IOException e) {
             System.out.println("Error loading file: " + fileName);
@@ -69,8 +76,19 @@ public class Menu {
     }
 
     private void filterStudentsByThreshold(Scanner scanner) {
-        System.out.print("Enter the threshold: ");
-        double threshold = scanner.nextDouble();
+        double threshold;
+
+        while (true) {
+            System.out.print("Enter the threshold (non-negative): ");
+            threshold = scanner.nextDouble();
+
+            if (threshold >= 0) {
+                break;
+            } else {
+                System.out.println("Error: Threshold cannot be negative. Please try again.");
+            }
+        }
+
         manager.filterStudentsByThreshold(threshold);
     }
 
@@ -78,6 +96,7 @@ public class Menu {
         manager.displayTop5AndBottom5Students();
     }
 }
+
 
     
 
